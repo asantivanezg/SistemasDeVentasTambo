@@ -10,8 +10,8 @@ import java.sql.SQLException;
 public class Conexion {
     public static Connection conectar(){
         try {
-            
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sistema_ventas","root","admin");
+            //Miguel 
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sistema_ventas","root","summer01");
             return cn;
             
         } catch (SQLException e) {
