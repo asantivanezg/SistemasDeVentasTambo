@@ -1,28 +1,113 @@
-
 package vista;
 
+import conexion.Conexion;
 import java.awt.Dimension;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.DetalleVenta;
 
 /**
  *
  * @author Eguiguren
  */
 public class InterFacturacion extends javax.swing.JInternalFrame {
-       
+
+    //Modelo de datos
+    private DefaultTableModel modeloDatosProductos;
+    //Lista para el detalle de venta de los productos
+    ArrayList<DetalleVenta> listaProductos = new ArrayList<>();
+    private DetalleVenta producto;
+
+    private int idProducto = 0;
+    private String nombre = "";
+    private int cantidadProductoBD = 0;
+    private double precioUnitario = 0.0;
+    private int porcentajeIgv = 0;
+
+    private int cantidad = 0;//cantidad de productos al comprar
+    private double subTotal = 0.0;//cantidad por precio
+    private double descuento = 0.0;
+    private double igv = 0.0;
+    private double totalPagar = 0.0;
+    
+    //Variables para calculos globales
+    private double subTotalGeneral = 0.0;
+    private double descuentoGeneral = 0.0;
+    private double igvGeneral = 0.0;
+    private double totalPagarGeneral = 0.0;
+    //Fin de los calculos globales
+
+    private int auxIdDetalle = 1;//id del detalle de la venta
+
     public InterFacturacion() {
         initComponents();
-        
-        this.setSize(new Dimension(800,600));
+
+        this.setSize(new Dimension(800, 600));
         this.setTitle("Facturacion");
+
+        //Cargar los clientes
+        this.cargarComboClientes();
+        //Cargar productos
+        this.cargarComboProductos();
+
+        this.inicializarTablaProducto();
         
+        txt_efectivo.setEnabled(false);
+        jButton_calcular_cambio.setEnabled(false);
+        
+        txt_subtotal.setText("0.0");
+        txt_igv.setText("0.0");
+        txt_descuento.setText("0.0");
+        txt_total_pagar.setText("0.0");
+
         // insertar imagen en nuestro JLabel
         ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(800, 600, WIDTH));
         jLabel_wallpaper.setIcon(icono);
         this.repaint();
+    }
+
+    //Metodo para inicializar la tabla de los productos
+    private void inicializarTablaProducto() {
+        modeloDatosProductos = new DefaultTableModel();
+        //Columnas
+        modeloDatosProductos.addColumn("N");
+        modeloDatosProductos.addColumn("Nombre");
+        modeloDatosProductos.addColumn("Cantidad");
+        modeloDatosProductos.addColumn("P. Unitario");
+        modeloDatosProductos.addColumn("SubTotal");
+        modeloDatosProductos.addColumn("Descuento");
+        modeloDatosProductos.addColumn("Igv");
+        modeloDatosProductos.addColumn("Total Pagar");
+        modeloDatosProductos.addColumn("Accion");
+        //Agregar datos del modelo a la tabla
+        this.jTable_productos.setModel(modeloDatosProductos);
+    }
+    
+    //Metodo para presentar la informacion de la tabla
+    private void listaTablaProductos(){
+        this.modeloDatosProductos.setRowCount(listaProductos.size());
+        for(int i = 0; i<listaProductos.size();i++){
+            this.modeloDatosProductos.setValueAt(i + 1, i, 0);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getNombre(), i, 1);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getCantidad(), i, 2);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getPrecioUnitario(), i, 3);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getSubTotal(), i, 4);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getDescuento(), i, 5);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getIgv(), i, 6);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getTotalPagar(), i, 7);
+            this.modeloDatosProductos.setValueAt("Eliminar", i, 8);//Boton para eliminar producto
+            
+        }
+        jTable_productos.setModel(modeloDatosProductos);
     }
 
     /**
@@ -63,6 +148,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         jButton_calcular_cambio = new javax.swing.JButton();
         jButton_RegistrarVenta = new javax.swing.JButton();
         jLabel_wallpaper = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -76,8 +162,8 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Cliente:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 80, -1));
+        jLabel2.setText("Dni:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 40, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,7 +186,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 170, -1));
 
         txt_cliente_buscar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_cliente_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 150, -1));
+        getContentPane().add(txt_cliente_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 150, -1));
 
         txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 60, -1));
@@ -112,7 +198,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
                 jButton_busca_clienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_busca_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 80, -1));
+        getContentPane().add(jButton_busca_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 80, -1));
 
         jButton_añadir_producto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_añadir_producto.setText("Añadir Producto");
@@ -137,6 +223,11 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable_productos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_productosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_productos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 740, 190));
@@ -194,14 +285,19 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         txt_cambio.setEnabled(false);
         jPanel2.add(txt_cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 120, -1));
 
-        jButton_calcular_cambio.setBackground(new java.awt.Color(51, 255, 255));
+        jButton_calcular_cambio.setBackground(new java.awt.Color(153, 0, 0));
         jButton_calcular_cambio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_calcular_cambio.setText("Calcular Cambio");
+        jButton_calcular_cambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_calcular_cambioActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton_calcular_cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 130, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, 380, 220));
 
-        jButton_RegistrarVenta.setBackground(new java.awt.Color(51, 255, 255));
+        jButton_RegistrarVenta.setBackground(new java.awt.Color(153, 0, 0));
         jButton_RegistrarVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_RegistrarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/apps_printer_15747.png"))); // NOI18N
         jButton_RegistrarVenta.setText("Registrar Venta");
@@ -210,16 +306,160 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         getContentPane().add(jButton_RegistrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 150, 100));
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 570));
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Cliente:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 80, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_busca_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_clienteActionPerformed
-        // TODO add your handling code here:
+
+        String clienteBuscar = txt_cliente_buscar.getText().trim();
+        Connection cn = Conexion.conectar();
+        String sql = "select nombre, apellido from tb_cliente where cedula = '" + clienteBuscar + "'";
+        Statement st;
+
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            if (rs.next()) {
+                jComboBox_cliente.setSelectedItem(rs.getString("nombre") + " " + rs.getString("apellido"));
+            } else {
+                jComboBox_cliente.setSelectedItem("Seleccione cliente:");
+                JOptionPane.showMessageDialog(null, "¡Dni de cliente incorrecta o no registrada!");
+            }
+            txt_cliente_buscar.setText("");
+            cn.close();
+
+        } catch (SQLException e) {
+            System.out.println("¡Error al buscar cliente!, " + e);
+        }
+
     }//GEN-LAST:event_jButton_busca_clienteActionPerformed
 
     private void jButton_añadir_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_añadir_productoActionPerformed
-        // TODO add your handling code here:
+
+        String combo = this.jComboBox_producto.getSelectedItem().toString();
+        //Validar que seleccione un producto
+        if (combo.equalsIgnoreCase("Seleccione producto:")) {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        } else {
+            //Validar que ingrese una cantidad
+            if (!txt_cantidad.getText().isEmpty()) {
+                //Validar que el usuario no ingrese caracteres no numericos
+                boolean validacion = validar(txt_cantidad.getText());
+                if (validacion == true) {
+                    //Validar que la cantidad sea mayor que 0
+                    if (Integer.parseInt(txt_cantidad.getText()) > 0) {
+
+                        cantidad = Integer.parseInt(txt_cantidad.getText());
+                        //Ejecutar metodo para obtener datos del producto
+                        this.DatosDelProducto();
+                        //Validar la cantidad de productos seleccionado no sea al stock de la base de datos
+                        if (cantidad <= cantidadProductoBD) {
+
+                            subTotal = precioUnitario * cantidad;
+                            //Total a pagar
+                            totalPagar = subTotal + igv + descuento;
+
+                            subTotal = (double) Math.round(subTotal * 100) / 100;
+                            igv = (double) Math.round(igv * 100) / 100;
+                            descuento = (double) Math.round(descuento * 100) / 100;
+                            totalPagar = (double) Math.round(totalPagar * 100) / 100;
+
+                            //Se crea un nuevo producto
+                            producto = new DetalleVenta(auxIdDetalle,
+                                    1,
+                                    idProducto,
+                                    nombre,
+                                    Integer.parseInt(txt_cantidad.getText()),
+                                    precioUnitario,
+                                    subTotal,
+                                    descuento,
+                                    igv,
+                                    totalPagar,
+                                    1);
+                            //Añadir a la lista
+                            listaProductos.add(producto);
+                            JOptionPane.showMessageDialog(null, "El producto a sido agregado");
+                            auxIdDetalle++;
+                            txt_cantidad.setText("");
+                            //volver  a cargar los productos
+                            this.cargarComboProductos();
+                            this.CalcularTotalPagar();
+                            txt_efectivo.setEnabled(true);
+                            jButton_calcular_cambio.setEnabled(true);
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "La cantidad supera el stock");
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La cantidad no puede ser cero (0) ni negativa");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La cantidad no se admiten caracteres no numericos");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese cantidad de productos");
+            }
+        }
+        this.listaTablaProductos();
+
     }//GEN-LAST:event_jButton_añadir_productoActionPerformed
+
+    private void jButton_calcular_cambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_calcular_cambioActionPerformed
+        if (!txt_efectivo.getText().isEmpty()) {
+            //Validamos que el usuario no ingrese otros carecteres no numericos
+            boolean validacion = validarDouble(txt_efectivo.getText());
+            if (validacion == true) {
+                //Validar que el objetivo sea mayor a cero
+                double efc = Double.parseDouble(txt_efectivo.getText().trim());
+                double top = Double.parseDouble(txt_total_pagar.getText().trim());
+                if (efc < top) {
+                    JOptionPane.showMessageDialog(null, "El efectivo no es suficiente");
+                } else {
+                    double cambio = (efc-top);
+                    double cambi = (double)Math.round(cambio*100d)/100;
+                    String camb = String.valueOf(cambi);
+                    txt_cambio.setText(camb);
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "No se admite caracteres no numericos");
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese el dinero en efectivo para calcular el cambio");
+        }
+    }//GEN-LAST:event_jButton_calcular_cambioActionPerformed
+    int idArrayList = 0;
+    private void jTable_productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_productosMouseClicked
+        int fila_point = jTable_productos.rowAtPoint(evt.getPoint());
+        int columna_point = 0;
+        
+        if (fila_point > -1) {
+            idArrayList = (int) modeloDatosProductos.getValueAt(fila_point, columna_point);
+        }
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Quiere eliminar el producto?");
+        //Opciones de confirmacion (si = 0, no = 1, cancel = 2, close = -1)
+        
+        switch(opcion){
+            case 0://Si presiona si
+                listaProductos.remove(idArrayList -1);
+                this.CalcularTotalPagar();
+                this.listaTablaProductos();
+                break;
+            case 1://Si presiona no
+                break;
+            default://Si presiona cancel (2) o close (-1)
+                break;
+        }
+    }//GEN-LAST:event_jTable_productosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -231,6 +471,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBox_producto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -253,4 +494,133 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_subtotal;
     private javax.swing.JTextField txt_total_pagar;
     // End of variables declaration//GEN-END:variables
+
+//Metodo para cargar clientes en el combo box
+    private void cargarComboClientes() {
+        Connection cn = Conexion.conectar();
+        String sql = "select * from tb_cliente";
+        Statement st;
+
+        try {
+
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            jComboBox_cliente.removeAllItems();
+            jComboBox_cliente.addItem("Seleccione cliente:");
+
+            while (rs.next()) {
+                jComboBox_cliente.addItem(rs.getString("nombre") + " " + rs.getString("apellido"));
+
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al cargar clientes, !" + e);
+        }
+    }
+
+    //Metodo para cargar clientes en el combo box
+    private void cargarComboProductos() {
+        Connection cn = Conexion.conectar();
+        String sql = "select * from tb_producto";
+        Statement st;
+
+        try {
+
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            jComboBox_producto.removeAllItems();
+            jComboBox_producto.addItem("Seleccione producto:");
+
+            while (rs.next()) {
+                jComboBox_producto.addItem(rs.getString("nombre"));
+
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al cargar producto, !" + e);
+        }
+    }
+
+    //Metodo para validar que el usuario no ingrese caracteres no numericos
+    private boolean validar(String valor) {
+        try {
+            int num = Integer.parseInt(valor);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    //Metodo para validar que el usuario no ingrese caracteres no numericos
+    private boolean validarDouble(String valor) {
+        try {
+            double num = Double.parseDouble(valor);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    //Metodo para mostrar los datos del producto seleccionado
+    private void DatosDelProducto() {
+        try {
+            String sql = "select * from tb_producto where nombre = '" + this.jComboBox_producto.getSelectedItem() + "'";
+            Connection cn = Conexion.conectar();
+            Statement st;
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                idProducto = rs.getInt("idProducto");
+                nombre = rs.getString("nombre");
+                cantidadProductoBD = rs.getInt("cantidad");
+                precioUnitario = rs.getDouble("precio");
+                porcentajeIgv = rs.getInt("porcentajeIgv");
+                this.CalcularIgv(precioUnitario, porcentajeIgv);//calcula y retorna el igv 
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos del producto" + e);
+        }
+    }
+    //Metodo para calcular igv
+
+    private double CalcularIgv(double precio, int porcentaIgv) {
+        int p_igv = porcentajeIgv;
+
+        switch (p_igv) {
+            case 0:
+                igv = 0.0;
+                break;
+            case 18:
+                igv = (precio * cantidad) * 0.18;
+                break;
+            default:
+                break;
+        }
+        return igv;
+    }
+    //Metodo para calcular el total a pagar de todos los productos
+    private void CalcularTotalPagar(){
+        subTotalGeneral = 0;
+        descuentoGeneral = 0;
+        igvGeneral = 0;
+        totalPagarGeneral = 0;
+        
+        for(DetalleVenta elemento : listaProductos){
+            subTotalGeneral += elemento.getSubTotal();
+            descuentoGeneral += elemento.getDescuento();
+            igvGeneral += elemento.getIgv();
+            totalPagarGeneral += elemento.getTotalPagar();
+        }
+        subTotalGeneral = (double)Math.round(subTotalGeneral * 100)/100;
+        igvGeneral = (double)Math.round(igvGeneral * 100)/100;
+        descuentoGeneral = (double)Math.round(descuentoGeneral * 100)/100;
+        totalPagarGeneral = (double)Math.round(totalPagarGeneral * 100)/100;
+        
+        //Enviar datos a la vista
+        txt_subtotal.setText(String.valueOf(subTotalGeneral));
+        txt_igv.setText(String.valueOf(igvGeneral));
+        txt_descuento.setText(String.valueOf(descuentoGeneral));
+        txt_total_pagar.setText(String.valueOf(totalPagarGeneral));
+    }
 }
