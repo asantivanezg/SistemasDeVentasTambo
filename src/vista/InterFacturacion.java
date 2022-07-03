@@ -319,7 +319,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
         String clienteBuscar = txt_cliente_buscar.getText().trim();
         Connection cn = Conexion.conectar();
-        String sql = "select nombre, apellido from tb_cliente where cedula = '" + clienteBuscar + "'";
+        String sql = "select nombre, apellido from tb_cliente where dni = '" + clienteBuscar + "'";
         Statement st;
 
         try {
