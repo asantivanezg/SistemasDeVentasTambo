@@ -1,6 +1,5 @@
 
 package controlador;
-
 import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,10 +8,7 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
-/**
- *
- * @author Eguiguren
- */
+
 public class Ctrl_Usuario {
     
     //Metodo para guardar un nuevo usuario
@@ -72,7 +68,8 @@ public class Ctrl_Usuario {
         boolean respuesta = false;
 
         Connection cn = Conexion.conectar();
-        String sql = "select usuario, password from tb_usuario where usuario = '" + objeto.getUsuario()+ "'and password = '" + objeto.getPassword() + "' ";
+        String sql = "select usuario, password from tb_usuario where usuario = '" 
+                + objeto.getUsuario()+ "'and password = '" + objeto.getPassword() + "' ";
         Statement st;
 
         try {
@@ -90,18 +87,16 @@ public class Ctrl_Usuario {
         }
         
         return respuesta;
-
     }
-    
     //Metodo de actualizar un Usuario
-    
     public boolean actualizar(Usuario objeto, int idUsuario){
         boolean respuesta = false;
         Connection cn = conexion.Conexion.conectar();
         try {
             
             PreparedStatement consulta = cn.prepareStatement(
-                    "update  tb_usuario set nombre = ?, apellido = ?, usuario = ?, password = ?, telefono = ?,estado = ?  where idUsuario ='" +idUsuario + "'");//Actualizar la categoria que seleccione
+                    "update  tb_usuario set nombre = ?, apellido = ?, usuario = ?, password = ?, telefono = ?,"
+                            + "estado = ?  where idUsuario ='" +idUsuario + "'");//Actualizar la categoria que seleccione
             consulta.setString(1, objeto.getNombre());
             consulta.setString(2, objeto.getApellido());
             consulta.setString(3, objeto.getUsuario());

@@ -1,6 +1,5 @@
 
 package controlador;
-
 import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,11 +9,6 @@ import java.sql.Statement;
 import modelo.Cliente;
 import modelo.Producto;
 
-
-/**
- *
- * @author Eguiguren
- */
 public class Ctrl_Cliente {
     
     //Metodo para guardar un nuevo cliente
@@ -76,7 +70,8 @@ public class Ctrl_Cliente {
         try {
             
             PreparedStatement consulta = cn.prepareStatement(
-                    "update  tb_cliente set nombre = ?, apellido = ?, dni = ?, telefono = ?, direccion = ?,estado = ?  where idCliente ='" +idCliente + "'");//Actualizar la categoria que seleccione
+                    "update  tb_cliente set nombre = ?, apellido = ?, dni = ?, telefono = ?, direccion = ?,"
+                            + "estado = ?  where idCliente ='" +idCliente + "'");//Actualizar la categoria que seleccione
             consulta.setString(1, objeto.getNombre());
             consulta.setString(2, objeto.getApellido());
             consulta.setString(3, objeto.getDni());

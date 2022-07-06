@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class Conexion {
     public static Connection conectar(){
         try {
-            //Miguel 
+            //Miguel etc
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sistema_ventas","root","summer01");
             return cn;
             

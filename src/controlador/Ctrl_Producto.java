@@ -1,6 +1,5 @@
 
 package controlador;
-
 import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,10 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Producto;
 
-/**
- *
- * @author Eguiguren
- */
 public class Ctrl_Producto {
     
     //Metodo para guardar un nuevo producto
@@ -75,7 +70,9 @@ public class Ctrl_Producto {
         try {
             
             PreparedStatement consulta = cn.prepareStatement(
-                    "update  tb_producto set nombre = ?, cantidad = ?, precio = ?, descripcion = ?, porcentajeIgv = ?,idCategoria = ?, estado = ?  where idCategoria ='" +idProducto + "'");//Actualizar la categoria que seleccione
+                    "update  tb_producto set nombre = ?, cantidad = ?, precio = ?, "
+                            + "descripcion = ?, porcentajeIgv = ?,idCategoria = ?, "
+                            + "estado = ?  where idCategoria ='" +idProducto + "'");//Actualizar la categoria que seleccione
             consulta.setString(1, objeto.getNombre());
             consulta.setInt(2, objeto.getCantidad());
             consulta.setDouble(3, objeto.getPrecio());
