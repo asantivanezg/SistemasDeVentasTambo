@@ -121,7 +121,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu2.add(jMenuItem_nuevo_producto);
 
         jMenuItem_gestionar_producto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_gestionar_producto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gestion-de-producto.png"))); // NOI18N
+        jMenuItem_gestionar_producto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/producto.png"))); // NOI18N
         jMenuItem_gestionar_producto.setText("Gestionar Producto");
         jMenuItem_gestionar_producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +158,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu3.add(jMenuItem_nuevo_cliente);
 
         jMenuItem_gestionar_cliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_gestionar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gestionarclientes.png"))); // NOI18N
+        jMenuItem_gestionar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cliente.png"))); // NOI18N
         jMenuItem_gestionar_cliente.setText("Gestionar Clientes");
         jMenuItem_gestionar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +185,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu4.add(jMenuItem_nueva_categoria);
 
         jMenuItem_gestionar_categorias.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_gestionar_categorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gestionarcategorias.png"))); // NOI18N
+        jMenuItem_gestionar_categorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/categorias.png"))); // NOI18N
         jMenuItem_gestionar_categorias.setText("Gestionar Categorias");
         jMenuItem_gestionar_categorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,22 +229,22 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu6.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMenuItem_reportes_clientes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportecliente.png"))); // NOI18N
+        jMenuItem_reportes_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
         jMenuItem_reportes_clientes.setText("Reportes Clientes");
         jMenu6.add(jMenuItem_reportes_clientes);
 
         jMenuItem_reportes_categorias.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_categorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportecategorias.png"))); // NOI18N
+        jMenuItem_reportes_categorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
         jMenuItem_reportes_categorias.setText("Reportes Categorias");
         jMenu6.add(jMenuItem_reportes_categorias);
 
         jMenuItem_reportes_productos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporteproducto.png"))); // NOI18N
+        jMenuItem_reportes_productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
         jMenuItem_reportes_productos.setText("Reportes Productos");
         jMenu6.add(jMenuItem_reportes_productos);
 
         jMenuItem_reportes_ventas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_ventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporteventas.png"))); // NOI18N
+        jMenuItem_reportes_ventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
         jMenuItem_reportes_ventas.setText("Reportes Ventas");
         jMenu6.add(jMenuItem_reportes_ventas);
 
@@ -256,7 +256,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu7.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMenuItem_ver_historial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_ver_historial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/verhistorial.png"))); // NOI18N
+        jMenuItem_ver_historial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
         jMenuItem_ver_historial.setText("Ver Historial");
         jMenu7.add(jMenuItem_ver_historial);
 
