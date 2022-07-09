@@ -127,6 +127,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jButton_IniciarSesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_IniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
         jButton_IniciarSesion.setText("Iniciar Sesion");
+        jButton_IniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_IniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_IniciarSesionActionPerformed(evt);
