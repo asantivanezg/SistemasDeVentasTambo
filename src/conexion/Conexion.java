@@ -11,7 +11,7 @@ public class Conexion {
     public static Connection conectar(){
         try {
             //Miguel etc prueba de git
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sistema_ventas","root","summer01");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sistema_ventas","root","admin");
             return cn;
             
         } catch (SQLException e) {

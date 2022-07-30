@@ -33,19 +33,6 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
     public InterGestionarProducto() {
         //Constructor
         initComponents();
-        this.setSize(new Dimension(900, 500));
-        this.setTitle("Gestionar Productos");
-
-        //Cargar tabla
-        this.CargarTablaProductos();
-        this.CargarComboCategoria();
-
-        // insertar imagen en nuestro JLabel
-        ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
-        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(900, 500, WIDTH));
-        jLabel_wallpaper.setIcon(icono);
-        this.repaint();
-
     }
 
     /**
@@ -116,21 +103,11 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         jButton_actualizar.setBackground(new java.awt.Color(51, 204, 0));
         jButton_actualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_actualizar.setText("Actualizar");
-        jButton_actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_actualizarActionPerformed(evt);
-            }
-        });
         jPanel2.add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jButton_eliminar.setBackground(new java.awt.Color(255, 51, 51));
         jButton_eliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_eliminar.setText("Eliminar");
-        jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_eliminarActionPerformed(evt);
-            }
-        });
         jPanel2.add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 130, 270));
@@ -187,7 +164,6 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         jPanel3.add(jComboBox_igv, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 150, -1));
 
         jComboBox_categoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria:", "Item 2", "Item 3", "Item 4" }));
         jPanel3.add(jComboBox_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, 150, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 870, 100));
@@ -196,117 +172,12 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
-
-        Producto producto = new Producto();
-        Ctrl_Producto controlProducto = new Ctrl_Producto();
-        String igv = "";
-        String categoria = "";
-        igv = jComboBox_igv.getSelectedItem().toString().trim();
-        categoria = jComboBox_categoria.getSelectedItem().toString().trim();
-
-        //Validar los campos 
-        if (txt_nombre.getText().isEmpty() || txt_cantidad.getText().isEmpty() || txt_precio.getText().isEmpty()) {
-
-            JOptionPane.showMessageDialog(null, "Complete todos los campos");
-
-        } else {
-
-            if (igv.equalsIgnoreCase("Seleccione Igv:")) {
-
-                JOptionPane.showMessageDialog(null, "Seleccione Igv");
-
-            } else {
-                if (categoria.equalsIgnoreCase("Seleccione categoria:")) {//equalsIgnoreCase pregunta si una cadena es igual a la otra ignorando mayusculas y minusculas
-                    JOptionPane.showMessageDialog(null, "Seleccione categoria");
-                } else {
-
-                    try {
-
-                        producto.setNombre(txt_nombre.getText().trim());
-                        producto.setCantidad(Integer.parseInt(txt_cantidad.getText().trim()));
-                        String precioTXT = "";
-                        double Precio = 0.0;
-                        precioTXT = txt_precio.getText().trim();
-                        boolean aux = false;
-
-                        //Si el usuario ingresa , (coma) como punto decimal, lo transformamos a punto (.)
-                        for (int i = 0; i < precioTXT.length(); i++) {
-                            if (precioTXT.charAt(i) == ',') {
-                                String precioNuevo = precioTXT.replace(",", ".");
-                                Precio = Double.parseDouble(precioNuevo);
-                                aux = true;
-                            }
-                        }
-                        //evaluamos las condiciones
-                        if (aux == true) {
-                            producto.setPrecio(Precio);
-                        } else {
-                            Precio = Double.parseDouble(precioTXT);
-                            producto.setPrecio(Precio);
-                        }
-
-                        producto.setDescripcion(txt_descripcion.getText().trim());
-
-                        //Porcentaje de IGV
-                        if (igv.equalsIgnoreCase("Sin Igv")) {
-                            producto.setPorcentajeIgv(0);
-                        } else if (igv.equalsIgnoreCase("18%")) {
-                            producto.setPorcentajeIgv(18);
-                        }
-
-                        //idCategoria - Cargar metodo que obtiene la id de categoria 
-                        this.IdCategoria();
-                        producto.setIdCategoria(obtenerIdCategoriaCombo);
-                        producto.setEstado(1);
-
-                        if (controlProducto.actualizar(producto, idProducto)) {
-
-                            JOptionPane.showMessageDialog(null, "Registro actualizado");
-
-                            this.CargarComboCategoria();
-                            this.CargarTablaProductos();
-                            this.jComboBox_igv.setSelectedItem("Seleccione Igv:");
-                            this.Limpiar();
-
-                        } else {
-
-                            JOptionPane.showMessageDialog(null, "Error al actualizar");
-                        }
-
-                    } catch (HeadlessException | NumberFormatException e) {
-                        System.out.println("Error en: " + e);
-                    }
-
-                }
-            }
-        }
-
-    }//GEN-LAST:event_jButton_actualizarActionPerformed
-
-    private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
-
-        Ctrl_Producto controlProducto = new Ctrl_Producto();
-        if (idProducto == 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione producto");
-        } else {
-            if (!controlProducto.eliminar(idProducto)) {
-                JOptionPane.showMessageDialog(null, "Producto Eliminado");
-                this.CargarTablaProductos();
-                this.CargarComboCategoria();
-                this.Limpiar();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar producto");
-            }
-        }
-    }//GEN-LAST:event_jButton_eliminarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_actualizar;
-    private javax.swing.JButton jButton_eliminar;
-    private javax.swing.JComboBox<String> jComboBox_categoria;
-    private javax.swing.JComboBox<String> jComboBox_igv;
+    public javax.swing.JButton jButton_actualizar;
+    public javax.swing.JButton jButton_eliminar;
+    public javax.swing.JComboBox<String> jComboBox_categoria;
+    public javax.swing.JComboBox<String> jComboBox_igv;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -314,16 +185,16 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel_wallpaper;
+    public javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable_productos;
-    private javax.swing.JTextField txt_cantidad;
-    private javax.swing.JTextField txt_descripcion;
-    private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_precio;
+    public javax.swing.JTextField txt_cantidad;
+    public javax.swing.JTextField txt_descripcion;
+    public javax.swing.JTextField txt_nombre;
+    public javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
 
     //Metodo de limpiar

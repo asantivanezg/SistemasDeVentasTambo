@@ -34,6 +34,7 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(new Dimension(900, 500));
         this.setTitle("Gestionar Usuarios");
+        this.setVisible(true);
 
         //Cargar tabla
         this.CargarTablaUsuarios();

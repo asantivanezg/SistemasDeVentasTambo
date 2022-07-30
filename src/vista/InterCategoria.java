@@ -1,12 +1,6 @@
 
 package vista;
 
-import java.awt.Dimension;
-import controlador.Ctrl_Categoria;
-import javax.swing.JOptionPane;
-import modelo.Categoria;
-
-
 /**
  *
  * @author Eguiguren
@@ -16,9 +10,6 @@ public class InterCategoria extends javax.swing.JInternalFrame {
     public InterCategoria() {
         //Constructor
         initComponents();
-
-        this.setSize(new Dimension(400, 200));//Ancho de la ventana
-        this.setTitle("Nueva Categoria");
     }
 
     /**
@@ -33,7 +24,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_descripcion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jLabel_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
@@ -53,15 +44,10 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         txt_descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 170, -1));
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 90, 30));
+        btnGuardar.setBackground(new java.awt.Color(0, 204, 204));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnGuardar.setText("Guardar");
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 90, 30));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 170));
@@ -69,43 +55,11 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        Categoria categoria = new Categoria();
-        Ctrl_Categoria controCategoria = new Ctrl_Categoria();
-
-        //Validar campos vacios
-        if (txt_descripcion.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Complete todos los campos");
-        } else {
-
-            if (!controCategoria.existeCategoria(txt_descripcion.getText().trim())) {
-
-                categoria.setDescripcion(txt_descripcion.getText().trim());
-                categoria.setEstado(1);
-                
-                if (controCategoria.guardar(categoria)) {
-                    JOptionPane.showMessageDialog(null, "Registro guardar");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar");
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "La categoria ya esta registrada en la base de datos");
-            }
-
-        }
-
-        //Limpiar campo
-        txt_descripcion.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_wallpaper;
-    private javax.swing.JTextField txt_descripcion;
+    public javax.swing.JTextField txt_descripcion;
     // End of variables declaration//GEN-END:variables
 }

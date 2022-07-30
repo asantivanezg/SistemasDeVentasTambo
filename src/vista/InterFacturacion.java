@@ -52,6 +52,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
         this.setSize(new Dimension(800, 600));
         this.setTitle("Facturacion");
+        this.setVisible(true);
 
         //Cargar los clientes
         this.cargarComboClientes();
@@ -156,7 +157,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Fracturación");
+        jLabel1.setText("Facturación");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

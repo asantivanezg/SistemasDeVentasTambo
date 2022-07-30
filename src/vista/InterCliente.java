@@ -1,11 +1,5 @@
 package vista;
 
-import controlador.Ctrl_Cliente;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.JOptionPane;
-import modelo.Cliente;
-
 /**
  *
  * @author Eguiguren
@@ -14,8 +8,6 @@ public class InterCliente extends javax.swing.JInternalFrame {
 
     public InterCliente() {
         initComponents();
-        this.setSize(new Dimension(400, 300));
-        this.setTitle("Nuevo Cliente");
 
     }
 
@@ -96,11 +88,6 @@ public class InterCliente extends javax.swing.JInternalFrame {
         jButton_guardar.setBackground(new java.awt.Color(0, 204, 204));
         jButton_guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton_guardar.setText("Guardar");
-        jButton_guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_guardarActionPerformed(evt);
-            }
-        });
         getContentPane().add(jButton_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 90, 30));
 
         txt_direccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -112,62 +99,9 @@ public class InterCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guardarActionPerformed
-
-        Cliente cliente = new Cliente();
-        Ctrl_Cliente controlCliente = new Ctrl_Cliente();
-
-        if (!txt_nombre.getText().isEmpty() && !txt_apellido.getText().isEmpty() && !txt_dni.getText().isEmpty()) {
-            //JOptionPane.showMessageDialog(null, "Correcto"); 
-
-            if (!controlCliente.existeCliente(txt_dni.getText().trim())) {
-
-                cliente.setNombre(txt_nombre.getText().trim());
-                cliente.setApellido(txt_apellido.getText().trim());
-                cliente.setDni(txt_dni.getText().trim());
-                cliente.setTelefono(txt_telefono.getText().trim());
-                cliente.setDireccion(txt_direccion.getText().trim());
-                cliente.setEstado(1);
-
-                if (controlCliente.guardar(cliente)) {
-                    JOptionPane.showMessageDialog(null, "Registro guardado");
-                    txt_nombre.setBackground(Color.green);
-                    txt_apellido.setBackground(Color.green);
-                    txt_dni.setBackground(Color.green);
-                    txt_telefono.setBackground(Color.green);
-                    txt_direccion.setBackground(Color.green);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar");
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "El cliente ya esta registrado en la Base de Datos");
-
-                txt_nombre.setBackground(Color.white);
-                txt_apellido.setBackground(Color.white);
-                txt_dni.setBackground(Color.white);
-                txt_telefono.setBackground(Color.white);
-                txt_direccion.setBackground(Color.white);
-            }
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "Complete todos los campos");
-
-            txt_nombre.setBackground(Color.red);
-            txt_apellido.setBackground(Color.red);
-            txt_dni.setBackground(Color.red);
-            txt_telefono.setBackground(Color.red);
-            txt_direccion.setBackground(Color.red);
-        }
-        //Metodo limpiar
-        this.Limpiar();
-
-    }//GEN-LAST:event_jButton_guardarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_guardar;
+    public javax.swing.JButton jButton_guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -175,21 +109,11 @@ public class InterCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_wallpaper;
-    private javax.swing.JTextField txt_apellido;
-    private javax.swing.JTextField txt_direccion;
-    private javax.swing.JTextField txt_dni;
-    private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_telefono;
+    public javax.swing.JTextField txt_apellido;
+    public javax.swing.JTextField txt_direccion;
+    public javax.swing.JTextField txt_dni;
+    public javax.swing.JTextField txt_nombre;
+    public javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
-
-    //Metodo para limpiar campos
-    private void Limpiar() {
-        txt_nombre.setText("");
-        txt_apellido.setText("");
-        txt_dni.setText("");
-        txt_telefono.setText("");
-        txt_direccion.setText("");
-
-    }
 
 }

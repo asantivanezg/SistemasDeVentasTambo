@@ -1,13 +1,7 @@
 package vista;
 
-import controlador.Ctrl_Usuario;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
-import modelo.Usuario;
-
-import java.awt.Dimension;
 
 /**
  *
@@ -17,10 +11,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
     public FrmLogin() {
         initComponents();
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Login - SISTEMA DE VENTAS - TAMBO");
-        this.setSize(new Dimension(700, 500));
     }
 
     @Override
@@ -177,18 +167,13 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_IniciarSesionActionPerformed
-        this.Login();
     }//GEN-LAST:event_jButton_IniciarSesionActionPerformed
 
     private void txt_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyPressed
-        if (evt.getKeyCode() == evt.VK_ENTER) {
-            txt_password.requestFocus();
-        }
     }//GEN-LAST:event_txt_usuarioKeyPressed
 
     private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER) {
-            this.Login();
     }//GEN-LAST:event_txt_passwordKeyPressed
     }
 
@@ -228,7 +213,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_IniciarSesion;
+    public javax.swing.JButton jButton_IniciarSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -237,35 +222,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField txt_password;
-    private javax.swing.JTextField txt_usuario;
+    public javax.swing.JPasswordField txt_password;
+    public javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
-
-//
-    private void Login() {
-        if (!txt_usuario.getText().isEmpty() && !txt_password.getText().isEmpty()) {
-
-            Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
-            Usuario usuario = new Usuario();
-            usuario.setUsuario(txt_usuario.getText().trim());//.trim = elimina los espacios ya sea al inicio o final de la cadena de texto
-            usuario.setPassword(txt_password.getText().trim());
-
-            if (controlUsuario.loginUser(usuario)) {
-                FrmMenu menu = new FrmMenu();
-                menu.setVisible(true);
-                this.dispose();//El menu de login se cierra
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "Usuario o Clave Incorrectos");
-
-            }
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "Ingrese el usuario y contraseña");
-
-        }
-    }
-
 }

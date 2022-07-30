@@ -17,6 +17,7 @@ public class InterUsuario extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(new Dimension(400, 300));
         this.setTitle("Nuevo Usuario");
+        this.setVisible(true);
         
         txt_password.setVisible(true);
         txt_password_visible.setVisible(false);

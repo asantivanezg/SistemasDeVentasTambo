@@ -28,9 +28,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo Usuario"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_nuevo_usuarioActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_gestionar_usuario">
               <Properties>
@@ -42,9 +42,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gestionar Usuarios"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_gestionar_usuarioActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -72,9 +72,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo Producto"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_nuevo_productoActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_gestionar_producto">
               <Properties>
@@ -86,9 +86,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gestionar Producto"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_gestionar_productoActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_actualizar_stock">
               <Properties>
@@ -100,9 +100,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Actualizar Stock"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_actualizar_stockActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -130,9 +130,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo Cliente"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_nuevo_clienteActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_gestionar_cliente">
               <Properties>
@@ -144,9 +144,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gestionar Clientes"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_gestionar_clienteActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -174,9 +174,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nueva Categoria"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_nueva_categoriaActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_gestionar_categorias">
               <Properties>
@@ -188,9 +188,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gestionar Categorias"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_gestionar_categoriasActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -218,9 +218,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nueva Venta"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_nueva_ventaActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_gestionar_ventas">
               <Properties>
@@ -232,9 +232,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gestionar Ventas"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_gestionar_ventasActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -262,6 +262,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reportes Clientes"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_reportes_categorias">
               <Properties>
@@ -273,6 +276,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reportes Categorias"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_reportes_productos">
               <Properties>
@@ -284,6 +290,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reportes Productos"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_reportes_ventas">
               <Properties>
@@ -295,6 +304,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reportes Ventas"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -322,6 +334,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ver Historial"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -349,9 +364,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cerrar Sesion"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_cerrar_sesionActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -379,10 +394,34 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-68,0,0,4,-80"/>
   </AuxValues>
 
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-    <Property name="useNullLayout" type="boolean" value="false"/>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jdpnContenedor" alignment="0" pref="1200" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jdpnContenedor" alignment="0" pref="660" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JDesktopPane" name="jdpnContenedor">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="33" type="rgb"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+    </Container>
+  </SubComponents>
 </Form>

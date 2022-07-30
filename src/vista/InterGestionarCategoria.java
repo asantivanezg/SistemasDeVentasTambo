@@ -29,6 +29,7 @@ public class InterGestionarCategoria extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(new Dimension(600, 400));
         this.setTitle("Gestionar Categoria");
+        this.setVisible(true);
         this.CargarTablaCategoria();
     }
 
